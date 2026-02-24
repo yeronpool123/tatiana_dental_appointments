@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="form-container">
+  <h2 class="form-title">❌Cancelar Cita</h2>
+
+  <div class="confirm-box">
+      <p class="confirm-text">
+        ¿Estás seguro que deseas eliminar la cita programada para<br>
+        <strong>{{ appointment.start }}</strong>?
+      </p>
+
+      <form method="post">{% csrf_token %}
+        <button class="btn btn-danger" type="submit">🚫Sí, cancelar</button>
+        <a class="btn btn-secondary" href="javascript:history.back()">🔙Volver</a>
+      </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="booking-wrapper">
+
+  <div class="glass-card animate-fade">
+    <h2 class="title">Agendar Cita <span></span></h2>
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger rounded-3 p-2 mb-3">
+        {% for err in form.non_field_errors %}
+          <div>{{ err }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" class="booking-form">
+      {% csrf_token %}
+
+      <div class="form-django">
+        {{ form.as_p }}
+      </div>
+
+      <button type="submit" class="btn-gradient">📑 Agendar</button>
+    </form>
+  </div>
+
+</div>
+
+<style>
+/* ——————————————————————————————
+   ESTILOS DE PÁGINA (VERSIÓN LEGIBLE)
+—————————————————————————————— */
+
+/* Wrapper centrado */
+.booking-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+}
+
+/* Card con glassmorphism claro */
+@media (min-width: 1000px) {
+  .glass-card {
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 767px) {
+  .glass-card {
+    max-width: 100%;
+  }
+}
+
+
+
+/* Título */
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--azul-logo);
+}
+.title span {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+/* Inputs */
+.glass-card input,
+.glass-card select,
+.glass-card textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+
+  background: var(--gris-claro);
+  border: 1px solid var(--celeste);
+  color: #1a1a1a;
+}
+
+.glass-card input:focus,
+.glass-card select:focus,
+.glass-card textarea:focus {
+  border-color: var(--azul-logo);
+  box-shadow: 0 0 8px rgba(0,119,182,0.3);
+  outline: none;
+}
+
+/* Botón */
+.btn-gradient {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+
+  background: linear-gradient(135deg, var(--celeste), var(--azul-logo));
+  color: white;
+
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 12px rgba(0,188,212,0.5);
+}
+
+/* Animación */
+.animate-fade {
+  animation: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<!-- ——————————————————————————————
+     JS de horarios dinámicos
+—————————————————————————————— -->
+
+<input type="date" id="date" name="date" style="display:none;">
+<select id="time" name="time" style="display:none;"></select>
+
+<script>
+document.getElementById("date").addEventListener("change", function() {
+    const dateValue = this.value;
+    if (!dateValue) return;
+
+    fetch(`/get-available-slots/?date=${dateValue}`)
+      .then(res => res.json())
+      .then(data => {
+        const sel = document.getElementById("time");
+        sel.innerHTML = '';
+
+        (data.available_slots || []).forEach(h => {
+          const opt = document.createElement('option');
+          opt.value = h;
+          opt.textContent = h;
+          sel.appendChild(opt);
+        });
+
+        if ((data.available_slots || []).length === 0) {
+          const opt = document.createElement('option');
+          opt.textContent = 'No hay horarios disponibles';
+          sel.appendChild(opt);
+        }
+      });
+});
+</script>
+
+{% endblock %}

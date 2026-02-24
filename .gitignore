@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node/Vue
+FrontEnd/node_modules/
+FrontEnd/dist/
+
+# Otros
+*.log

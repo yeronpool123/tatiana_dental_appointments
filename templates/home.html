@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="home-container">
+  
+  <div class="home-header">
+      <h1 class="home-title">🦷Clínica Dental🦷<br>Tatiana Maldonado</h1>
+      <p class="home-sub">Bienvenido 👋<br>Aquí puedes ver tus próximas citas</p>
+  </div>
+
+  <div class="appointments-box">
+    <h3 class="box-title">Próximas citas</h3>
+
+    <ul class="appointments-list">
+      {% for a in upcoming %}
+        <li class="appointment-item">
+          <strong>{{ a.start }}</strong><br>
+          {{ a.first_name }} {{ a.last_name }} — {{ a.phone }}
+        </li>
+      {% empty %}
+        <li class="appointment-empty">No hay citas programadas.</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+</div>
+
+{% endblock %}

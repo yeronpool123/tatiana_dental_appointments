@@ -1,0 +1,1 @@
+See README in the package. Follow steps to run: pip install -r requirements.txt, migrate, createsuperuser, runserver.

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-primary"><i class="fa-solid fa-file-medical"></i> Mis Historias Clínicas</h2>
+  <ul class="list-group mt-3">
+    {% for h in histories %}
+      <li class="list-group-item">
+        <strong>{{ h.created_at|date:"d/m/Y H:i" }}</strong><br>
+        <i class="fa-solid fa-stethoscope"></i> {{ h.medical_background }}<br>
+        <i class="fa-solid fa-pills"></i> {{ h.allergies }}<br>
+        <i class="fa-solid fa-tooth"></i> {{ h.treatments }}
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">No tienes historias clínicas registradas.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

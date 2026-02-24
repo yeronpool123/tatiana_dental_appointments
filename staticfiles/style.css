@@ -1,0 +1,539 @@
+/* === GLOBAL RESET & DARK GLASS THEME === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.dark-glass {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f1115, #1a1d22);
+  color: #f0f0f0;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  min-height: 100vh;
+}
+
+/* === NAVBAR === */
+.glass-nav {
+  background: rgba(30, 30, 40, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.glass-nav .navbar-brand {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.glass-nav .nav-link {
+  color: #e0e0e0;
+  margin-left: 1rem;
+  transition: color 0.3s ease;
+}
+
+.glass-nav .nav-link:hover {
+  color: #76eaff;
+  text-shadow: 0 0 8px rgba(118, 234, 255, 0.6);
+  border-bottom: 2px solid #76eaff;
+}
+
+/* === CONTAINER === */
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+/* === FORMULARIOS === */
+form {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+form input,
+form textarea,
+form select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e0fdfc;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+  transition: 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: #76eaff;
+  box-shadow: 0 0 10px rgba(118, 234, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+/* === BOTONES === */
+button,
+.btn {
+  background: linear-gradient(135deg, #00aaff, #0051ff);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
+}
+
+/* Botón especial con gradiente dinámico */
+.btn-gradient {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.5);
+}
+
+/* === ALERTAS === */
+.glass-alert {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e0e0e0;
+  backdrop-filter: blur(10px);
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* === FOOTER (opcional) === */
+footer {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #aaa;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+}
+
+/* === TRANSICIONES GLOBALES === */
+a,
+button,
+input,
+textarea,
+select {
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* === MIS CITAS (my_appointments.html) === */
+
+.appointments-wrapper {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(118, 234, 255, 0.4);
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointment-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.6s ease;
+  text-align: left;
+}
+
+.appointment-header {
+  margin-bottom: 10px;
+}
+
+.appointment-title {
+  color: #76eaff;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.appointment-body p {
+  margin: 6px 0;
+  color: #e0e0e0;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.status.pending {
+  background: rgba(255, 200, 0, 0.2);
+  color: #ffd86b;
+}
+
+.status.confirmed {
+  background: rgba(0, 255, 120, 0.2);
+  color: #7affb0;
+}
+
+.status.cancelled {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff8a8a;
+}
+
+.appointment-footer {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #ff4b4b, #b30000);
+  border-radius: 10px;
+  padding: 10px 18px;
+  transition: 0.3s ease;
+}
+
+.btn-cancel:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 80, 80, 0.6);
+}
+
+.no-appointments {
+  margin-top: 40px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+.no-appointments i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #76eaff;
+}
+
+
+main.container {
+  text-align: center;
+}
+
+
+/* === INICIO: TABLA DE CITAS === */
+
+.home-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(118, 234, 255, 0.4);
+}
+
+.appointments-table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.6s ease;
+}
+
+.appointments-table th,
+.appointments-table td {
+  padding: 14px 18px;
+  text-align: left;
+  color: #e0e0e0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.appointments-table th {
+  background: rgba(255, 255, 255, 0.08);
+  color: #76eaff;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(118, 234, 255, 0.3);
+}
+
+.appointments-table tr:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.3s ease;
+}
+
+.no-appointments {
+  margin-top: 40px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+.no-appointments i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #76eaff;
+}
+/* === FIN: TABLA DE CITAS === */
+
+
+
+/* === BUSCADOR GLASS === */
+
+.search-bar {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 25px auto;
+}
+
+.search-bar-inner {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  transition: 0.3s ease;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.search-bar-inner:hover {
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 18px rgba(118, 234, 255, 0.4);
+}
+
+.search-bar-inner input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e0fdfc;
+  font-size: 1rem;
+  padding-left: 35px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 1.1rem;
+  color: #76eaff;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* === EFECTO BRILLO EN FILAS COINCIDENTES === */
+
+.row-highlight {
+  background: rgba(118, 234, 255, 0.15) !important;
+  box-shadow: 0 0 12px rgba(118, 234, 255, 0.6);
+  transition: 0.3s ease;
+}
+
+.row-hidden {
+  display: none;
+}
+
+
+.status-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.status-actions .btn {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  transition: 0.3s ease;
+}
+
+.status-actions .btn:hover {
+  transform: scale(1.05);
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status.pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.status.confirmed {
+  background: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+.status.cancelled {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.4);
+}
+
+/* Borde verde para citas confirmadas */
+.appointments-table tbody tr.confirmed-row {
+    border-left: 4px solid #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+}
+
+
+/* Animación suave del icono de pendiente */
+.status.pending i {
+    animation: pulse 1.4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+    100% { opacity: 0.4; transform: scale(1); }
+}
+
+
+/* === ICONO ANIMADO PARA CANCELADAS === */
+
+.status.cancelled i {
+    animation: xPulse 1.2s infinite ease-in-out;
+    display: inline-block;
+}
+
+@keyframes xPulse {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.25) rotate(8deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+}
+
+
+
+/* === ANIMACIÓN PARA CONFIRMADA === */
+.status.confirmed i {
+    animation: confirmPulse 1.2s infinite ease-in-out;
+    display: inline-block;
+}
+
+@keyframes confirmPulse {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.25) rotate(8deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+}
+
+
+.logo-img {
+  height: 42px;
+  width: auto;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
+  transition: 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

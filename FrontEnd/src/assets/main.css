@@ -1,0 +1,38 @@
+@import './base.css';
+
+:root{
+  --brand:#0b2a66;
+  --accent:#007bff;
+  --muted:#6c757d;
+}
+
+/* App wrapper */
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+/* Links */
+a, .green {
+  text-decoration: none;
+  color: var(--brand);
+  transition: 0.25s;
+  padding: 3px;
+}
+a:hover { color: var(--accent); }
+
+/* Header / layout adjustments removed grid that caused two-column split */
+@media (min-width: 1024px) {
+  #app {
+    padding: 1.5rem;
+  }
+}
+
+/* Small utility */
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* Ensure consistent box-sizing */
+*, *::before, *::after { box-sizing: border-box; }

@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🦷 Panel del Paciente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #cce5ff, #e6f2ff);
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .glass {
+      background: rgba(255,255,255,0.28);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .glass:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    .nav-card {
+      transition: transform .18s ease, box-shadow .18s ease;
+      border-radius: 16px;
+    }
+    .nav-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    .brand {
+      color:#0072ff;
+      font-weight:700;
+    }
+    .icon-big {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0072ff;
+    }
+  </style>
+</head>
+
+
+
+<!-- NAVBAR del Panel Paciente -->
+<nav class="navbar navbar-expand-lg shadow-sm mb-4" style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <i class="fa-solid fa-tooth text-primary"></i>
+      <span class="brand">Tatiana Dental</span>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDashboard">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarDashboard">
+      <ul class="navbar-nav ms-auto">
+        <!-- Volver a inicio -->
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="fa-solid fa-house me-1"></i> Panel Administrador
+          </a>
+        </li>
+
+        <!-- Panel Paciente -->
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'patient_dashboard' %}">
+            <i class="fa-solid fa-user me-1"></i> Panel Paciente
+          </a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<body class="py-4">
+  <div class="container">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="brand"><i class="fa-solid fa-tooth me-2"></i></h3>
+      <div>
+        <a href="{% url 'patient_profile_edit' %}" class="btn btn-outline-primary me-2">
+          <i class="fa-solid fa-user-gear me-1"></i> Perfil
+        </a>
+        <a href="{% url 'account_logout' %}" class="btn btn-primary">
+          <i class="fa-solid fa-right-from-bracket me-1"></i> Cerrar sesión
+        </a>
+      </div>
+    </div>
+
+    <!-- Bienvenida -->
+    <div class="glass p-4 mb-4">
+      <h4 class="mb-3">Hola, {{ request.user.first_name|default:request.user.username }} 👋</h4>
+      <p class="text-muted mb-4">Bienvenido a tu panel. Aquí puedes agendar tus citas, revisar tu historial y actualizar tu perfil.</p>
+
+      <div class="row g-3">
+        <!-- Agendar cita -->
+        <div class="col-md-4">
+        <a href="{% url 'book_appointment' %}" class="text-decoration-none">
+          <div class="card nav-card text-center p-3">
+            <i class="fa-solid fa-calendar-plus icon-big"></i>
+            <h5 class="card-title">Agendar cita</h5>
+            <p class="card-text text-muted">Selecciona fecha, hora y motivo de consulta.</p>
+          </div>
+        </a>
+        </div>
+
+        <!-- Mis citas -->
+        <div class="col-md-4">
+          <a href="{% url 'patient_appointments' %}" class="text-decoration-none">
+            <div class="card nav-card text-center p-3">
+              <i class="fa-solid fa-clipboard-list icon-big"></i>
+              <h5 class="card-title">Mis citas</h5>
+              <p class="card-text text-muted">Consulta próximas y pasadas, cancela o reprograma.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Mi perfil -->
+        <div class="col-md-4">
+          <a href="{% url 'patient_profile_edit' %}" class="text-decoration-none">
+            <div class="card nav-card text-center p-3">
+              <i class="fa-solid fa-user-shield icon-big"></i>
+              <h5 class="card-title">Mi perfil</h5>
+              <p class="card-text text-muted">Actualiza tu información de contacto y seguros.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reportes -->
+<div class="col-md-4">
+  <a href="{% url 'reports_dashboard' %}" class="text-decoration-none">
+    <div class="card nav-card text-center p-3">
+      <i class="fa-solid fa-chart-line icon-big"></i>
+      <h5 class="card-title">Reportes</h5>
+      <p class="card-text text-muted">Genera estadísticas de citas y pacientes.</p>
+    </div>
+  </a>
+</div>
+
+
+    <p class="text-center mt-4 text-muted">Accediste como {{ request.user.email }} · {{ request.user.last_login }}</p>
+  </div>
+
+  <!-- Historia clínica -->
+  <div class="container mt-4">
+    <div class="row g-4">
+      <!-- Registrar historia clínica -->
+      <div class="col-md-6">
+        <div class="card glass p-3 nav-card text-center">
+          <i class="fa-solid fa-notes-medical fa-2x text-primary mb-2"></i>
+          <h5 class="brand">Registrar Historia Clínica</h5>
+          <p class="text-muted">Completa tus antecedentes médicos, alergias y tratamientos previos.</p>
+          <a href="{% url 'add_history' %}" class="btn btn-outline-primary w-100">
+            <i class="fa-solid fa-pen-to-square"></i> Registrar
+          </a>
+        </div>
+      </div>
+
+      <!-- Ver historia clínica -->
+      <div class="col-md-6">
+        <div class="card glass p-3 nav-card text-center">
+          <i class="fa-solid fa-file-medical fa-2x text-success mb-2"></i>
+          <h5 class="brand">Ver Historia Clínica</h5>
+          <p class="text-muted">Consulta tus registros médicos guardados en el sistema.</p>
+          <a href="{% url 'view_history' %}" class="btn btn-outline-success w-100">
+            <i class="fa-solid fa-eye"></i> Ver registros
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

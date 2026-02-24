@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="gradient-text mb-4"><i class="fa-solid fa-chart-line me-2"></i> Reportes</h2>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="service-box text-center">
+        <h5 class="gradient-text">Citas Totales</h5>
+        <p>{{ total_citas }}</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="service-box text-center">
+        <h5 class="gradient-text">Confirmadas</h5>
+        <p>{{ citas_confirmadas }}</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="service-box text-center">
+        <h5 class="gradient-text">Canceladas</h5>
+        <p>{{ citas_canceladas }}</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="service-box text-center">
+        <h5 class="gradient-text">Pendientes</h5>
+        <p>{{ citas_pendientes }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 text-center">
+    <h5 class="gradient-text">Pacientes Registrados</h5>
+    <p>{{ total_pacientes }}</p>
+  </div>
+</div>
+{% endblock %}

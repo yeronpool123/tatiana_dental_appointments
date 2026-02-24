@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="appointments-wrapper">
+
+    <h2 class="section-title">
+        <i class="fa-solid fa-calendar-check me-2"></i>Citas Agendadas
+    </h2>
+
+    {% if appointments %}
+        <div class="appointments-grid">
+
+            {% for a in appointments %}
+            <div class="appointment-card">
+
+                <div class="appointment-header">
+                    <h4 class="appointment-title">
+                        <i class="fa-solid fa-tooth me-2"></i>
+                        {{ a.service }}
+                    </h4>
+                </div>
+
+                <div class="appointment-body">
+                    <p><strong><i class="fa-solid fa-user me-1"></i>Paciente:</strong> {{ a.first_name }} {{ a.last_name }}</p>
+                    <p><strong>Fecha:</strong> {{ a.start|date:"d/m/Y" }}</p>
+                    <p><strong>Hora:</strong> {{ a.start|date:"H:i" }}</p>
+
+                    {% if a.description %}
+                        <p><strong>Descripción:</strong> {{ a.description }}</p>
+                    {% endif %}
+
+                    <p><strong>Estado:</strong>
+                        {% if a.status == "pending" %}
+                            <span class="status pending">Pendiente</span>
+                        {% elif a.status == "confirmed" %}
+                            <span class="status confirmed">Confirmada</span>
+                        {% else %}
+                            <span class="status cancelled">Cancelada</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="appointment-footer">
+
+                    {% if user.is_staff or user.is_superuser %}
+                    <div class="status-actions">
+
+                        <a href="{% url 'set_status' a.id 'pending' %}" 
+                           class="btn btn-warning btn-sm">
+                            <i class="fa-solid fa-clock"></i> 🔁Pendiente
+                        </a>
+
+                        <a href="{% url 'set_status' a.id 'confirmed' %}" 
+                           class="btn btn-success btn-sm">
+                            <i class="fa-solid fa-check"></i> ✅Confirmar
+                        </a>
+
+                        <a href="{% url 'set_status' a.id 'cancelled' %}" 
+                           class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-xmark"></i> ❌Cancelar
+                        </a>
+
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+        <div class="no-appointments">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <p>No tienes citas registradas.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    const rows = document.querySelectorAll(".appointments-table tbody tr");
+
+    input.addEventListener("keyup", function () {
+        const value = input.value.toLowerCase().trim();
+
+        rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+
+            if (value === "") {
+                row.style.display = ""; 
+            } else if (text.includes(value)) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}
