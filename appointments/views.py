@@ -13,7 +13,39 @@ from history.models import ClinicalHistory
 from django.db.models import Count 
 from django.shortcuts import render 
 from appointments.models import Appointment 
+from django.contrib.auth import login, get_backends
+
+import face_recognition
+from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
+# Cargar la foto de referencia del admin
+admin_image = face_recognition.load_image_file("media/admin_face.jpg")
+admin_encoding = face_recognition.face_encodings(admin_image)[0]
+
+def face_login_view(request):
+    if request.method == "POST":
+        uploaded_file = request.FILES["face_image"]
+        image = face_recognition.load_image_file(uploaded_file)
+        encodings = face_recognition.face_encodings(image)
+
+        if encodings:
+            match = face_recognition.compare_faces([admin_encoding], encodings[0])[0]
+            if match:
+                # Buscar al usuario admin
+                admin_user = User.objects.get(username="admin")
+                # Especificar backend para evitar error
+                admin_user.backend = "django.contrib.auth.backends.ModelBackend"
+                login(request, admin_user)
+                # Redirigir al dashboard existente
+                return redirect("patient_dashboard")
+        
+        # Si no hay coincidencia
+        return render(request, "face_login.html", {"error": "No se reconoció el rostro"})
+    
+    # GET: mostrar la página
+    return render(request, "face_login.html")
 
 
 
@@ -99,12 +131,17 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('login')
 
+
+#REGISTRO DE USUARIOS
+
 def register_view(request):
     """Registro manual de usuario (además de allauth)."""
     if request.method == 'POST':
         username = request.POST['email']
         password = request.POST['password']
         confirm = request.POST['confirm']
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
 
         if password != confirm:
             messages.error(request, "Las contraseñas no coinciden")
@@ -114,16 +151,21 @@ def register_view(request):
             messages.error(request, "Este correo ya está registrado")
             return redirect('register')
 
+        # Crear usuario con nombre y apellido
         User.objects.create_user(
             username=username,
             email=username,
-            password=password
+            password=password,
+            first_name=first_name,
+            last_name=last_name
         )
 
         messages.success(request, "Cuenta creada correctamente")
         return redirect('login')
 
     return render(request, 'registration/register.html')
+
+
 
 # -----------------------------
 # HOME

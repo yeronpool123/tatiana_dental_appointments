@@ -10,8 +10,6 @@ urlpatterns = [
     path('my/', views.my_appointments, name='my_appointments'),
     path('cancel/<int:pk>/', views.cancel, name='cancel'),
 
-    
-
     # LOGIN / LOGOUT manual
     path('login/', views.login_view, name='login'),
     path('logout/', views.cerrar_sesion, name='logout'),
@@ -25,6 +23,8 @@ urlpatterns = [
     # Cambiar estado (solo admin)
     path("set-status/<int:pk>/<str:status>/", views.set_status, name="set_status"),
 
-    path("services/", views.services, name="services")
+    path("services/", views.services, name="services"),
 
+    # 🔑 NUEVA RUTA: login facial para admin
+    path("admin-face-login/", views.face_login_view, name="face_login"),
 ]

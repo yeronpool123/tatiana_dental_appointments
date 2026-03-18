@@ -111,6 +111,24 @@
     <form method="post">
       {% csrf_token %}
 
+
+      <!-- BLOQUE DE FORMULARIO DE REGISTRO DE USUARIO-->
+       
+      <div class="mb-3">
+        <label for="first_name" class="form-label">Nombre</label>
+        <input type="text" name="first_name" class="form-control" required placeholder="Tu nombre">
+      </div>
+
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Apellido</label>
+        <input type="text" name="last_name" class="form-control" required placeholder="Tu apellido">
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Dirección</label>
+        <input type="text" name="address" class="form-control" placeholder="Tu dirección">
+      </div>
+
       <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico</label>
         <input type="email" name="email" class="form-control" required placeholder="ejemplo@correo.com">

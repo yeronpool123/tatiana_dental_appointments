@@ -99,10 +99,16 @@
       </div>
     </div>
 
+
     <!-- Bienvenida -->
     <div class="glass p-4 mb-4">
-      <h4 class="mb-3">Hola, {{ request.user.first_name|default:request.user.username }} 👋</h4>
-      <p class="text-muted mb-4">Bienvenido a tu panel. Aquí puedes agendar tus citas, revisar tu historial y actualizar tu perfil.</p>
+      {% if request.user.username == "admin" %}
+        <h4 class="mb-3">Hola Admin 👋</h4>
+      {% else %}
+        <h4 class="mb-3">Hola, {{ request.user.first_name }} {{ request.user.last_name }} 👋</h4>
+      {% endif %}
+
+      <p class="text-muted mb-4">Bienvenido, aquí puedes agendar tus citas, revisar tu historial y actualizar tu perfil.</p>
 
       <div class="row g-3">
         <!-- Agendar cita -->
@@ -140,16 +146,7 @@
       </div>
     </div>
 
-    <!-- Reportes -->
-<div class="col-md-4">
-  <a href="{% url 'reports_dashboard' %}" class="text-decoration-none">
-    <div class="card nav-card text-center p-3">
-      <i class="fa-solid fa-chart-line icon-big"></i>
-      <h5 class="card-title">Reportes</h5>
-      <p class="card-text text-muted">Genera estadísticas de citas y pacientes.</p>
-    </div>
-  </a>
-</div>
+
 
 
     <p class="text-center mt-4 text-muted">Accediste como {{ request.user.email }} · {{ request.user.last_login }}</p>
